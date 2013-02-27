@@ -1,1 +1,1 @@
-2d shoother game being made with Java and Slick.
+2d shooter game being made with Java and Slick.
