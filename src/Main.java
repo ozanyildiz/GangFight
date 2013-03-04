@@ -10,7 +10,6 @@ public class Main extends BasicGame {
 	
     public Main() {
         super("GangFight");
-        System.out.println("AMK: " + Math.toDegrees(Math.atan2(15, 20)));
     }
     
     @Override

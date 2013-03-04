@@ -7,27 +7,26 @@ import org.newdawn.slick.geom.Vector2f;
 
 public class Projectile extends Entity {
 	
-	private double angleInDegrees;
 	private Vector2f direction;
-	private float speed = 0.05f;
+	private float speed = 0.90f;
 	
-	public Projectile(GameWorld gameWorld, float x, float y, Vector2f direction) {
-		super(gameWorld);
-		this.x = x;
-		this.y = y;
-//		this.angleInDegrees = angleInDegrees;
+	public Projectile(GameWorld gameWorld, float x, float y, Vector2f direction) throws SlickException {
+		super(gameWorld, x, y);
 		this.direction = direction;
-	}
-	
-	public void init() throws SlickException {
 		image = new Image("assets/pistol_bullet.png");
 	}
-
+	
 	@Override
 	public boolean update(GameContainer container, int deltaTime) {
 		x += Math.cos(Math.toRadians(direction.getTheta())) * speed * deltaTime;
 		y += Math.sin(Math.toRadians(direction.getTheta())) * speed * deltaTime;
-		return true;
+		
+		if (!isOutOfScreen()) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	@Override
@@ -35,4 +34,10 @@ public class Projectile extends Entity {
 		image.draw(x, y);
 	}
 	
+	private boolean isOutOfScreen() {
+		if (x < 0 || x > gameWorld.getWidth() || y < 0 || y > gameWorld.getHeight()) 
+			return true;
+		else
+			return false;
+	}
 }

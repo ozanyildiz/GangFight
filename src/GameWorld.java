@@ -13,24 +13,37 @@ public class GameWorld {
 	private List<Entity> entities = new ArrayList<Entity>();
 	private List<Entity> newEntities = new ArrayList<Entity>();
 	
+	EnemyManager enemyManager;
+	
+	private int width;
+	private int height;
+	
+	private int yMovementLimit = 265;
+	
 	public void init() throws SlickException {
-    	player = new Player(this, 100, 100);
-    	player.init();
+    	player = new Player(this, 50, 400);
     	backgroundImage = new Image("assets/background.png");
     	addEntity(player);
+    	
+    	width = backgroundImage.getWidth();
+    	height = backgroundImage.getHeight();
+    	
+    	enemyManager = new EnemyManager(this);
 	}
 	
-    public void update(GameContainer container, int deltaTime) {
+    public void update(GameContainer container, int deltaTime) throws SlickException {
     	Iterator<Entity> entityIterator = entities.iterator();
     	while (entityIterator.hasNext()) {
     		Entity entity = entityIterator.next();    		
-    		if (!entity.update(container, deltaTime)) {
+    		if (!entity.update(container, deltaTime) || entity.isRemoved()) {
+    			entity.setRemoved();
     			entityIterator.remove();
-    			System.out.println("LOL");
     		}
     	}
     	entities.addAll(newEntities);
     	newEntities.clear();
+    	
+    	enemyManager.update(container, deltaTime);
     }
     
     public void render(GameContainer container, Graphics g) {
@@ -44,5 +57,17 @@ public class GameWorld {
     
     public void addEntity(Entity e) {
     	newEntities.add(e);
+    }
+    
+    public int getWidth() {
+    	return width;
+    }
+    
+    public int getHeight() {
+    	return height;
+    }
+    
+    public int getYMovementLimit() {
+    	return yMovementLimit;
     }
 }
