@@ -10,7 +10,7 @@ public class Enemy extends Entity {
 	private Vector2f velocity;
 	
 	public Enemy(GameWorld gameWorld, float x, float y) throws SlickException {
-		super(gameWorld, x, y);
+		super(gameWorld, x, y, 32, 32);
 		velocity = new Vector2f(0.05f, 0.2f);
 		image = new Image("assets/enemy01.png");
 		image.getFlippedCopy(false, true);

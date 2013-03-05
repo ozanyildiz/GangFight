@@ -39,6 +39,10 @@ public class GameWorld {
     			entity.setRemoved();
     			entityIterator.remove();
     		}
+    		else {
+    			entity.updatePolygon();
+    			entity.checkCollisions(entities);
+    		}
     	}
     	entities.addAll(newEntities);
     	newEntities.clear();
@@ -52,6 +56,7 @@ public class GameWorld {
     	while (entityIterator.hasNext()) {
     		Entity entity = entityIterator.next();
     		entity.render(container, g);
+    		g.draw(entity.entityPolygon);
     	}
     }
     
@@ -70,4 +75,8 @@ public class GameWorld {
     public int getYMovementLimit() {
     	return yMovementLimit;
     }
+
+	public List<Entity> getEntities() {
+		return entities;
+	}
 }

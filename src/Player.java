@@ -18,7 +18,7 @@ public class Player extends Entity {
 	private Point positionBeforeJump = new Point(0.0f, 0.0f);
 	
 	Player (GameWorld gameWorld, float x, float y) throws SlickException {
-		super(gameWorld, x, y);
+		super(gameWorld, x, y, 32, 32);
 		velocity = new Vector2f(0.2f, 0.2f);
 		image = new Image("assets/player.png");
 	}
@@ -63,14 +63,13 @@ public class Player extends Entity {
 				velocity.y = 0.2f;
 			}
 		}
-		
+				
 		return true;
 	}
 
 	@Override
 	public void render(GameContainer container, Graphics g) {
 		image.draw(x, y);
-		
 	}
 		
 	private void shootBullet(float mouseX, float mouseY) throws SlickException {

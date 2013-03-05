@@ -8,10 +8,10 @@ import org.newdawn.slick.geom.Vector2f;
 public class Projectile extends Entity {
 	
 	private Vector2f direction;
-	private float speed = 0.90f;
+	private float speed = 0.30f;
 	
 	public Projectile(GameWorld gameWorld, float x, float y, Vector2f direction) throws SlickException {
-		super(gameWorld, x, y);
+		super(gameWorld, x, y, 5, 5);
 		this.direction = direction;
 		image = new Image("assets/pistol_bullet.png");
 	}
@@ -32,6 +32,7 @@ public class Projectile extends Entity {
 	@Override
 	public void render(GameContainer container, Graphics g) {
 		image.draw(x, y);
+		g.draw(entityPolygon);
 	}
 	
 	private boolean isOutOfScreen() {
@@ -39,5 +40,16 @@ public class Projectile extends Entity {
 			return true;
 		else
 			return false;
+	}
+	
+	@Override
+	protected void onCollide(Entity entity) {
+		if (!isRemoved()) {
+			if (entity instanceof Enemy) {
+				setRemoved();
+				Enemy enemy = (Enemy) entity;
+				enemy.setRemoved();
+			}
+		}
 	}
 }
