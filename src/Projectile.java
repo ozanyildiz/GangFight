@@ -8,7 +8,7 @@ import org.newdawn.slick.geom.Vector2f;
 public class Projectile extends Entity {
 	
 	private Vector2f direction;
-	private float speed = 0.30f;
+	private float speed = 1.5f;
 	
 	public Projectile(GameWorld gameWorld, float x, float y, Vector2f direction) throws SlickException {
 		super(gameWorld, x, y, 5, 5);
