@@ -15,11 +15,13 @@ public class MenuState extends BasicGameState {
 	public static final int ID = 1;
 	private Image menuImage;
 	private Image startButtonImage;
+	private Image creditButtonImage;
 	
 	@Override
 	public void init(GameContainer arg0, StateBasedGame arg1) throws SlickException {
 		menuImage = new Image("assets/menu/background.png");
 		startButtonImage = new Image("assets/menu/start_button.png");
+		creditButtonImage = new Image("assets/menu/credit_button.png");
 	}
 
 	@Override
@@ -27,6 +29,9 @@ public class MenuState extends BasicGameState {
 		g.drawImage(menuImage, 0, 0);
 		Rectangle buttonRect = getStartButtonRect(container);
 		startButtonImage.draw(buttonRect.getX(), buttonRect.getY());
+		buttonRect = getCreditButtonRect(container);
+		creditButtonImage.draw(buttonRect.getX(), buttonRect.getY());
+		
 		g.setColor(Color.blue);
 		//g.drawRect(buttonRect.getX(), buttonRect.getY(), buttonRect.getWidth(), buttonRect.getHeight());
 	}
@@ -39,6 +44,10 @@ public class MenuState extends BasicGameState {
 			if (buttonRect.contains(input.getMouseX(), input.getMouseY())) {
 				sbg.enterState(NGameState.ID);
 			}
+			buttonRect = getCreditButtonRect(container);
+			if (buttonRect.contains(input.getMouseX(), input.getMouseY())) {
+				sbg.enterState(CreditState.ID);
+			}
 		}
 	}
 
@@ -47,10 +56,16 @@ public class MenuState extends BasicGameState {
 		return ID;
 	}
 	
+	int buttonWidth = 200;
+	int buttonHeight = 60;
+	int spaceBetweenButtons = buttonHeight + 10;
+	
 	private Rectangle getStartButtonRect(GameContainer container) {
-		int buttonWidth = 200;
-		int buttonHeight = 60;
 		return new Rectangle(container.getWidth() / 2 - buttonWidth / 2, container.getHeight() / 2 - buttonHeight / 2, buttonWidth, buttonHeight);
 	}
 
+	private Rectangle getCreditButtonRect(GameContainer container) {
+		return new Rectangle(container.getWidth() / 2 - buttonWidth / 2, container.getHeight() / 2 - buttonHeight / 2 + spaceBetweenButtons, buttonWidth, buttonHeight);
+	}
+	
 }
