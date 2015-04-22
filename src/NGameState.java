@@ -29,34 +29,4 @@ public class NGameState extends BasicGameState {
 	public int getID() {
 		return ID;
 	}
-	
-//    public Main() {
-//        super("GangFight");
-//    }
-    
-//    @Override
-//    public void init(GameContainer container) throws SlickException {
-//    	gameWorld = new GameWorld();
-//    	gameWorld.init();
-//    }
-//
-//    @Override
-//    public void update(GameContainer container, int delta) throws SlickException {
-//    	gameWorld.update(container, delta);
-//    }
-//
-//    @Override
-//    public void render(GameContainer container, Graphics g) throws SlickException {
-//    	gameWorld.render(container, g);
-//    }
-
-//    public static void main(String[] args) {
-//        try {
-//            AppGameContainer app = new AppGameContainer(new Main());
-//            app.setShowFPS(false);
-//            app.start();
-//        } catch (SlickException e) {
-//            e.printStackTrace();
-//        }
-//    }
 }
